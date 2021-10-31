@@ -21,6 +21,10 @@ module CriticalPathCss
       @config['routes']
     end
 
+    def out_dir
+      @config['out_dir']
+    end
+
     def penthouse_options
       @config['penthouse_options'] || {}
     end

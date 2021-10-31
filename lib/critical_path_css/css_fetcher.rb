@@ -1,5 +1,6 @@
 require 'json'
 require 'open3'
+require 'digest'
 
 module CriticalPathCss
   class CssFetcher

@@ -1,20 +1,23 @@
 require 'critical_path_css/configuration'
 require 'critical_path_css/css_fetcher'
 require 'critical_path_css/rails/config_loader'
+require 'digest'
 
 module CriticalPathCss
   CACHE_NAMESPACE = 'critical-path-css'.freeze
 
   def self.generate(route)
     css = fetcher.fetch_route(route)
-    ::Rails.cache.write(route, css, namespace: CACHE_NAMESPACE, expires_in: nil)
-    File.open("/tmp/critical.css.html.erb", "w") {|f| f.write(css)}
+    #::Rails.cache.write(route, css, namespace: CACHE_NAMESPACE, expires_in: nil)
+    fn = ::Rails.root.join(fetcher.config.out_dir, Digest::SHA256.hexdigest(route), ".css")
+    File.open(fn, "w") {|f| f.write(css)}
   end
 
   def self.generate_all
     fetcher.fetch.each do |route, css|
-      ::Rails.cache.write(route, css, namespace: CACHE_NAMESPACE, expires_in: nil)
-      File.open("/tmp/critical.css.html.erb", "w") {|f| f.write(css)}
+      #::Rails.cache.write(route, css, namespace: CACHE_NAMESPACE, expires_in: nil)
+      fn = ::Rails.root.join(fetcher.config.out_dir, Digest::SHA256.hexdigest(route), ".css")
+      File.open(fn, "w") {|f| f.write(css)}
     end
   end
 
