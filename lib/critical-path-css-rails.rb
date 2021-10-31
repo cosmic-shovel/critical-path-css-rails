@@ -6,12 +6,15 @@ module CriticalPathCss
   CACHE_NAMESPACE = 'critical-path-css'.freeze
 
   def self.generate(route)
-    ::Rails.cache.write(route, fetcher.fetch_route(route), namespace: CACHE_NAMESPACE, expires_in: nil)
+    css = fetcher.fetch_route(route)
+    ::Rails.cache.write(route, css, namespace: CACHE_NAMESPACE, expires_in: nil)
+    File.open("#{Rails.root}/app/views/partials/critical.css.html.erb", "w") {|f| f.write(css)}
   end
 
   def self.generate_all
     fetcher.fetch.each do |route, css|
       ::Rails.cache.write(route, css, namespace: CACHE_NAMESPACE, expires_in: nil)
+      File.open("#{Rails.root}/app/views/partials/critical.css.html.erb", "w") {|f| f.write(css)}
     end
   end
 
