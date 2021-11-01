@@ -30,6 +30,10 @@ module CriticalPathCss
     end
 
     def path_for_route(route)
+      if css_paths.length() == 1
+        return css_paths[0]
+      end
+
       css_paths[routes.index(route).to_i]
     end
   end
