@@ -10,6 +10,10 @@ module CriticalPathCss
       @config = config
     end
 
+    def config()
+      return @config
+    end
+
     def fetch
       @config.routes.map { |route| [route, fetch_route(route)] }.to_h
     end

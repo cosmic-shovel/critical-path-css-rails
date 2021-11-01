@@ -9,14 +9,14 @@ module CriticalPathCss
   def self.generate(route)
     css = fetcher.fetch_route(route)
     #::Rails.cache.write(route, css, namespace: CACHE_NAMESPACE, expires_in: nil)
-    fn = ::Rails.root.join(fetcher.config.out_dir, Digest::SHA256.hexdigest(route), ".css")
+    fn = ::Rails.root.join(fetcher.config.out_dir, Digest::SHA256.hexdigest(route) + ".css")
     File.open(fn, "w") {|f| f.write(css)}
   end
 
   def self.generate_all
     fetcher.fetch.each do |route, css|
       #::Rails.cache.write(route, css, namespace: CACHE_NAMESPACE, expires_in: nil)
-      fn = ::Rails.root.join(fetcher.config.out_dir, Digest::SHA256.hexdigest(route), ".css")
+      fn = ::Rails.root.join(fetcher.config.out_dir, Digest::SHA256.hexdigest(route) + ".css")
       File.open(fn, "w") {|f| f.write(css)}
     end
   end
