@@ -31,13 +31,13 @@ module CriticalPathCss
           #  '^\.regexWorksToo'
         ],
         # set to true to throw on CSS errors (will run faster if no errors)
-        'strict' => false,
+        'strict' => true,
         # characters; strip out inline base64 encoded resources larger than this
-        'maxEmbeddedBase64Length' => 1000,
+        'maxEmbeddedBase64Length' => 10000,
         # specify which user agent string when loading the page
         'userAgent' => 'Penthouse Critical Path CSS Generator',
         # ms; render wait timeout before CSS processing starts (default: 100)
-        'renderWaitTime' => 1000,
+        'renderWaitTime' => 10000,
         # set to false to load (external) JS (default: true)
         'blockJSRequests' => true,
         'customPageHeaders' => {
