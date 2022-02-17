@@ -3,11 +3,9 @@ source 'https://rubygems.org'
 gemspec
 
 group :development, :test do
-  gem 'actionpack'
+  gem 'actionpack', '~> 6.1'
   gem 'byebug', platform: [:ruby], require: false
-  gem 'rubocop', require: false
-  gem 'rspec-rails', '~> 3.8'
-  gem 'capybara', '~> 3.14'
+  gem 'capybara'#, '~> 3.14'
   gem 'pry-rails'
 end
 
