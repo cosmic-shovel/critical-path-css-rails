@@ -22,7 +22,7 @@ module CriticalPathCss
         config['css_paths'] = [config['css_path']] if config['css_path']
 
         unless config['css_paths']
-          config['css_paths'] = [ActionController::Base.helpers.stylesheet_path(config['manifest_name'], host: "#{::Rails.root}/public")]
+          config['css_paths'] = [ActionController::Base.helpers.stylesheet_path(config['manifest_name']]
         end
       end
 
